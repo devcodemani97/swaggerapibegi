@@ -1,16 +1,12 @@
-'use strict';
-
-//mongoose file must be loaded before all other files in order to provide
-// models to other modules
-var express = require('express'),
+let express = require('express'),
     router = express.Router(),
     bodyParser = require('body-parser'),
     swaggerUi = require('swagger-ui-express'),
     swaggerDocument = require('./swagger.json');
 
-var getIP = require('ipware')().get_ip;
+let getIP = require('ipware')().get_ip;
 
-var mongoose = require('mongoose'),
+let mongoose = require('mongoose'),
     Schema = mongoose.Schema;
 
 mongoose.connect('mongodb://localhost:27017/swagger-demo',
@@ -19,7 +15,7 @@ mongoose.connect('mongodb://localhost:27017/swagger-demo',
         useUnifiedTopology: true
     });
 
-var employeeSchema = new Schema({
+let employeeSchema = new Schema({
     contactno: {
         type: String, required: true,
         trim: true, unique: true
@@ -30,9 +26,9 @@ var employeeSchema = new Schema({
 });
 
 mongoose.model('employee', employeeSchema);
-var employee = require('mongoose').model('employee');
+let employee = require('mongoose').model('employee');
 
-var app = express();
+let app = express();
 
 //rest API requirements
 app.use(bodyParser.urlencoded({
@@ -41,8 +37,8 @@ app.use(bodyParser.urlencoded({
 app.use(bodyParser.json());
 
 //middleware for create
-var createemployee = function (req, res, next) {
-    var employees = new employee(req.body);
+let createemployee = function (req, res, next) {
+    let employees = new employee(req.body);
 
     employees.save(function (err) {
         if (err) {
@@ -52,11 +48,11 @@ var createemployee = function (req, res, next) {
         }
     });
 };
-var getOneemployee = function (req, res) {
+let getOneemployee = function (req, res) {
     res.json(req.employee);
 };
 
-var getByIdemployee = function (req, res, next, id) {
+let getByIdemployee = function (req, res, next, id) {
 
     employee.findOne({ _id: id }, function (err, employee) {
         if (err) {
