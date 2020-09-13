@@ -76,5 +76,8 @@ router.param('employeeId', getByIdemployee);
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 app.use('/api/v1', router);
 
-app.listen(3000);
+app.listen(3000,function(){
+    console.log('server is running in 3000 port')
+    console.log(`For swagger ui use this link http://localhost:3000/api-docs`)
+});
 module.exports = app;
