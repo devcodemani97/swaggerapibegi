@@ -1,0 +1,100 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "1.0.0",
+    "title": "employee Details using Node.js",
+    "description": "Node.js REST API with Swagger"
+  },
+  "host": "localhost:3000",
+  "basePath": "/api/v1",
+ 
+  "schemes": [
+    "http"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/employee": {
+      "post": {
+        "tags": [
+          "employee"
+        ],
+        "description": "Create new employee in system",
+        "parameters": [
+          {
+            "name": "employee",
+            "in": "body",
+            "description": "employee that we want to create",
+            "schema": {
+              "$ref": "#/definitions/employee"
+            }
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "New employee is created",
+            "schema": {
+              "$ref": "#/definitions/employee"
+            }
+          }
+        }
+      }
+    },
+    "/employee/{employeeId}": {
+      "parameters": [
+        {
+          "name": "employeeId",
+          "in": "path",
+          "required": true,
+          "description": "ID of employee that we want to find",
+          "type": "string"
+        }
+      ],
+      "get": {
+        "tags": [
+          "employee"
+        ],
+        "summary": "Get employee with given ID",
+        "responses": {
+          "200": {
+            "description": "employee is found",
+            "schema": {
+              "$ref": "#/definitions/employee"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "employee": {
+      "required": [
+        "name",
+        "contactno"
+      ],
+      "properties": {
+        "name": {
+          "type": "string",
+          "uniqueItems": true
+        },
+        "contactno": {
+          "type": "string",
+          "uniqueItems": true
+        },
+        "address": {
+          "type": "string"
+        },
+        "qualification": {
+          "type": "string"
+        }
+      }
+    }
+  }
+}
